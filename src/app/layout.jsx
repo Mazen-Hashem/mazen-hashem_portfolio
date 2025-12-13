@@ -16,7 +16,7 @@ export const metadata = {
     title: "Mazen Hashem | Frontend Web Developer",
     description:
       "A frontend web developer crafting clean and responsive web experiences. Explore projects and contact Mazen Hashem.",
-    url: "https://mazen_hashem-portfolio.vercel.app",
+    url: "https://mazenhashem-portfolio.vercel.app/",
     siteName: "Mazen Hashem Portfolio",
     images: [
       {
