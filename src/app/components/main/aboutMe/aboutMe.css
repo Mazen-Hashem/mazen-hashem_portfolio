@@ -1,0 +1,282 @@
+.about-section {
+  /* Vertical padding for the About section on desktop */
+  padding: var(--section-padding-base) 0;
+
+  .container {
+    /* Layout: image on the left, text on the right */
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+
+    /* --- IMAGE BOX --- */
+    .about-image-box {
+      position: relative;
+      width: 300px;
+
+      /* Dark overlay above the image for a moody effect */
+      &::before {
+        position: absolute;
+        content: "";
+        inset: 0;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 110%;
+        transform: translateY(-5%);
+        pointer-events: none; /* overlay doesn't block clicks */
+      }
+
+      .about-image {
+        display: block;
+        width: 100%;
+        height: 110%;
+        object-fit: cover;
+        object-position: center;
+        transform: translateY(-5%);
+      }
+    }
+
+    /* --- CONTENT BOX --- */
+    .about-content-box {
+      /* Take remaining space next to image */
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+
+      .about-title {
+        /* "About Me" heading with gold gradient text */
+        width: fit-content;
+        font-size: var(--text-4xl);
+        background: linear-gradient(
+          135deg,
+          var(--gold-two-clr) 10%,
+          var(--gold-three-clr) 50%,
+          var(--gold-one-clr) 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .about-subtitle {
+        /* Name + role line */
+        font-size: var(--text-xl);
+        color: var(--text-clr);
+
+        span {
+          /* Vertical separator bar between name and role */
+          display: inline-block;
+          width: 1px;
+          height: 1em;
+          margin: 0 10px;
+          background: linear-gradient(
+            180deg,
+            var(--blue-three-clr),
+            var(--gold-three-clr),
+            var(--gold-one-clr),
+            var(--gold-three-clr),
+            var(--blue-three-clr)
+          );
+          vertical-align: middle;
+        }
+      }
+
+      .about-description {
+        /* Paragraph styling for bio */
+        font-size: var(--text-base);
+        line-height: var(--line-height-lg);
+        color: var(--text-clr);
+      }
+
+      /* --- SOCIALS --- */
+      .about-socials-box {
+        display: flex;
+        gap: 15px;
+
+        .about-social-link {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+
+          /* Hover: animate gradient inside the icon */
+          &:hover .about-social-icon {
+            background-position: bottom right;
+          }
+
+          /* Active: reset gradient position */
+          &:active .about-social-icon {
+            background-position: top left;
+          }
+
+          /* Icon masking based on link order:
+             1: LinkedIn, 2: GitHub, 3: WhatsApp.
+             Each <i> gets its shape from an SVG mask. */
+          &:nth-child(1) .about-social-icon {
+            -webkit-mask: url("/icons/linkedin.svg") center / contain no-repeat;
+            mask: url("/icons/linkedin.svg") center / contain no-repeat;
+          }
+
+          &:nth-child(2) .about-social-icon {
+            -webkit-mask: url("/icons/github.svg") center / contain no-repeat;
+            mask: url("/icons/github.svg") center / contain no-repeat;
+          }
+
+          &:nth-child(3) .about-social-icon {
+            -webkit-mask: url("/icons/whatsapp.svg") center / contain no-repeat;
+            mask: url("/icons/whatsapp.svg") center / contain no-repeat;
+          }
+
+          .about-social-icon {
+            /* The actual visible icon: gradient fills the SVG mask */
+            display: block;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(
+              135deg,
+              var(--gold-two-clr) 10%,
+              var(--gold-three-clr) 50%,
+              var(--gold-one-clr) 90%
+            );
+            background-size: 100% 200%;
+            background-position: top left;
+            transition: background-position var(--transition-duration) ease;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/*=================== md: tablets =================== */
+@media (max-width: 991.98px) {
+  .about-section {
+    /* Slightly less vertical padding on tablets */
+    padding: var(--section-padding-md) 0;
+
+    .container {
+      gap: 10px;
+
+      /* --- IMAGE BOX --- */
+      .about-image-box {
+        width: 250px; /* smaller image width */
+      }
+
+      /* --- CONTENT BOX --- */
+      .about-content-box {
+        gap: 15px;
+
+        .about-title {
+          font-size: var(--text-3xl);
+        }
+
+        .about-subtitle {
+          font-size: var(--text-lg);
+
+          span {
+            margin: 0 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  .about-section {
+    padding: var(--section-padding-sm) 0;
+
+    .container {
+      /* --- IMAGE BOX --- */
+      .about-image-box {
+        /* Hide image on small screens to keep layout clean */
+        display: none;
+      }
+
+      /* --- CONTENT BOX --- */
+      .about-content-box {
+        /* Center text and adjust spacing for smaller viewports */
+        align-items: center;
+        gap: 20px;
+
+        .about-title {
+          font-size: var(--text-2xl);
+        }
+
+        .about-subtitle {
+          font-size: var(--text-base);
+
+          span {
+            margin: 0 6px;
+          }
+        }
+
+        .about-description {
+          font-size: var(--text-sm);
+          line-height: var(--line-height-sm);
+          text-align: center;
+        }
+
+        /* --- SOCIALS --- */
+        .about-socials-box {
+          gap: 10px;
+
+          .about-social-link {
+            .about-social-icon {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .about-section {
+    padding: var(--section-padding-xm) 0;
+
+    .container {
+      /* --- CONTENT BOX --- */
+      .about-content-box {
+        gap: 15px;
+
+        .about-title {
+          font-size: var(--text-xl);
+        }
+
+        .about-subtitle {
+          font-size: var(--text-sm);
+
+          span {
+            margin: 0 4px;
+          }
+        }
+
+        .about-description {
+          font-size: var(--text-xs);
+        }
+
+        /* --- SOCIALS --- */
+        .about-socials-box {
+          gap: 8px;
+
+          .about-social-link {
+            .about-social-icon {
+              width: 18px;
+              height: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.education-description-item {
+  /* Bullet text for each education detail line */
+  font-size: var(--text-base);
+  line-height: var(--line-height-lg);
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  .education-description-item {
+    /* Slightly smaller, tighter text on small screens */
+    font-size: var(--text-sm);
+    line-height: var(--line-height-sm);
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .education-description-item {
+    /* Smallest font size on very small phones */
+    font-size: var(--text-xs);
+  }
+}

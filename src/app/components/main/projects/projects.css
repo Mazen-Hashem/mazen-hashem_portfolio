@@ -1,0 +1,230 @@
+.projects-section {
+  /* Vertical spacing for the Projects section on desktop */
+  padding: var(--section-padding-base) 0;
+
+  .container {
+    /* Stack title and slider vertically */
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-padding-base);
+
+    .projects-title-box {
+      /* Center row: line + bar + title + bar + line */
+      display: flex;
+      align-items: center;
+
+      .projects-line {
+        /* Gradient line expanding left/right from the title */
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          135deg,
+          var(--gold-two-clr) 10%,
+          var(--gold-three-clr) 50%,
+          var(--gold-one-clr) 90%
+        );
+      }
+
+      .projects-br {
+        /* Vertical bar next to the title: same style as other sections */
+        display: inline-block;
+        width: 1px;
+        height: 2em;
+        background: linear-gradient(
+          180deg,
+          var(--blue-three-clr),
+          var(--gold-three-clr),
+          var(--gold-one-clr),
+          var(--gold-three-clr),
+          var(--blue-three-clr)
+        );
+      }
+
+      .projects-title {
+        /* "Projects" heading with gold gradient text */
+        width: fit-content;
+        margin: 0 10px;
+        font-size: var(--text-4xl);
+        background: linear-gradient(
+          135deg,
+          var(--gold-two-clr) 10%,
+          var(--gold-three-clr) 50%,
+          var(--gold-one-clr) 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+    }
+
+    .projects-box {
+      /* Visible area for the horizontal slider */
+      position: relative;
+      overflow: hidden; /* hides overflowed cards when sliding */
+
+      .projects-btns-box {
+        /* Container for chevron buttons, overlaid on top of the slider */
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        z-index: 3;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none; /* so click-through works except on buttons */
+
+        .projects-chevron-btn {
+          /* Circle buttons for next/previous */
+          border: none;
+          background-color: rgba(0, 0, 0, 0.4);
+          border-radius: 50%;
+          pointer-events: all; /* re-enable pointer events on actual buttons */
+          cursor: pointer;
+          transition: background-color var(--transition-duration);
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+          }
+
+          &:active {
+            background-color: rgba(0, 0, 0, 0.8);
+          }
+
+          .projects-chevron-icon {
+            /* SVG chevron icon size */
+            display: block;
+            width: 35px;
+            height: 35px;
+          }
+        }
+      }
+
+      .scroll-box {
+        /* Inner horizontal strip that holds all Project cards */
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        transform: translateX(0px); /* updated via inline style in React */
+        transition: transform var(--transition-duration) ease-in-out;
+      }
+    }
+  }
+}
+
+
+/*=================== md: tablets =================== */
+@media (max-width: 991.98px) {
+  .projects-section {
+    padding: var(--section-padding-md) 0;
+
+    .container {
+      gap: var(--section-padding-md);
+
+      .projects-title-box {
+        .projects-title {
+          margin: 0 8px;
+          font-size: var(--text-3xl);
+        }
+      }
+
+      .projects-box {
+        .projects-btns-box {
+          .projects-chevron-btn {
+            .projects-chevron-icon {
+              /* Slightly smaller arrows on tablets */
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
+
+        .scroll-box {
+          /* Tighten spacing between project cards on tablets */
+          gap: 18px;
+        }
+      }
+    }
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  .projects-section {
+    padding: var(--section-padding-sm) 0;
+
+    .container {
+      gap: var(--section-padding-sm);
+
+      .projects-title-box {
+        .projects-br {
+          /* Shorter vertical bars on small screens */
+          height: 1.5em;
+        }
+
+        .projects-title {
+          margin: 0 6px;
+          font-size: var(--text-2xl);
+        }
+      }
+
+      .projects-box {
+        .projects-btns-box {
+          .projects-chevron-btn {
+            .projects-chevron-icon {
+              width: 28px;
+              height: 28px;
+            }
+          }
+        }
+
+        .scroll-box {
+          gap: 15px;
+        }
+      }
+    }
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .projects-section {
+    padding: var(--section-padding-xm) 0;
+
+    .container {
+      gap: var(--section-padding-xm);
+
+      .projects-title-box {
+        .projects-br {
+          height: 1.2em;
+        }
+
+        .projects-title {
+          margin: 0 4px;
+          font-size: var(--text-xl);
+        }
+      }
+
+      .projects-box {
+        .projects-btns-box {
+          .projects-chevron-btn {
+            .projects-chevron-icon {
+              /* Smallest buttons on very small phones */
+              width: 25px;
+              height: 25px;
+            }
+          }
+        }
+
+        .scroll-box {
+          /* Tightest spacing between cards on very small phones */
+          gap: 10px;
+        }
+      }
+    }
+  }
+}

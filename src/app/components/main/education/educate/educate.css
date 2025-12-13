@@ -1,0 +1,113 @@
+.education-educate-box {
+  /* Card-like container for a single education entry */
+  --gap: 5px;
+  background-color: var(--box-bg-clr);
+  color: var(--text-clr);
+  padding: 20px;
+
+  /* Slight offset + soft shadow for a subtle depth effect */
+  transform: translate(1px);
+  box-shadow: 4px 4px 4px rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-duration);
+
+  /* On hover, lift the card slightly and increase the shadow */
+  &:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 6px rgba(255, 255, 255, 0.1);
+  }
+
+  .education-name {
+    /* Institution / program name */
+    font-size: var(--text-xl);
+    margin-bottom: var(--gap);
+  }
+
+  .education-field {
+    /* Field of study or specialization */
+    font-size: var(--text-lg);
+    margin-bottom: var(--gap);
+  }
+
+  .education-date {
+    /* Date range text */
+    font-size: var(--text-base);
+  }
+
+  .education-list-description {
+    /* Bullet list of details under each education item */
+    margin: 20px 0 0 15px;
+    list-style: circle;
+  }
+}
+
+
+/*=================== md: tablets =================== */
+@media (max-width: 991.98px) {
+  .education-educate-box {
+    padding: 18px;
+
+    .education-name {
+      font-size: var(--text-lg);
+    }
+
+    .education-field {
+      font-size: var(--text-base);
+    }
+
+    .education-date {
+      font-size: var(--text-base);
+    }
+
+    .education-list-description {
+      margin: 18px 0 0 15px;
+    }
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  .education-educate-box {
+    padding: 15px;
+
+    .education-name {
+      font-size: var(--text-base);
+    }
+
+    .education-field {
+      font-size: var(--text-sm);
+    }
+
+      .education-date {
+      font-size: var(--text-sm);
+    }
+
+    .education-list-description {
+      margin: 15px 0 0 15px;
+    }
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .education-educate-box {
+    padding: 10px;
+
+    .education-name {
+      font-size: var(--text-sm);
+    }
+
+    .education-field {
+      font-size: var(--text-xs);
+    }
+
+    .education-date {
+      font-size: var(--text-xs);
+    }
+
+    .education-list-description {
+      margin: 10px 0 0 15px;
+    }
+  }
+}

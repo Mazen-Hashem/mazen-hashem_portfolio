@@ -1,0 +1,42 @@
+footer {
+  padding: 20px 0;
+  background-color: black;
+
+  .container {
+
+    .copy-right {
+      text-align: center;
+      font-size: var(--text-base);
+      color: var(--text-clr);
+    }
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  footer {
+    padding: 15px 0;
+
+    .container {
+
+      .copy-right {
+        font-size: var(--text-sm);
+      }
+    }
+  }
+}
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  footer {
+    padding: 10px 0;
+
+    .container {
+
+      .copy-right {
+        font-size: var(--text-xs);
+      }
+    }
+  }
+}

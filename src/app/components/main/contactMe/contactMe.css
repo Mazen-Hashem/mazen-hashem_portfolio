@@ -1,0 +1,264 @@
+.contactMe-section {
+  /* Vertical padding for Contact section on desktop */
+  padding: var(--section-padding-base) 0;
+
+  .container {
+    /* Two-column layout: info on the left, form on the right */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    .contactMe-content-box {
+      /* Vertical spacing between title, info boxes, and socials */
+      --gap: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+
+      .contactMe-title {
+        /* "Contact Me" heading with gold gradient */
+        width: fit-content;
+        font-size: var(--text-4xl);
+        background: linear-gradient(135deg,
+            var(--gold-two-clr) 10%,
+            var(--gold-three-clr) 50%,
+            var(--gold-one-clr) 90%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .contactMe-info-box {
+        /* Block that groups a small title + info lines */
+
+        & .contactMe-info:not(:last-child) {
+          /* Space between multiple info lines in the same block */
+          margin-bottom: calc(var(--gap) / 4);
+        }
+
+        .contactMe-info-title {
+          /* "Get in touch", "Where I Am" title */
+          margin-bottom: calc(var(--gap) / 2);
+          font-size: var(--text-xl);
+          color: var(--text-clr);
+        }
+
+        .contactMe-info {
+          /* Base style for text lines (phone, email, city) */
+          font-size: var(--text-base);
+          color: var(--text-clr);
+
+          .contactMe-link {
+            /* Links inside info (tel / mailto) */
+            text-decoration: underline;
+            color: var(--text-clr);
+
+            &:hover {
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      .contactMe-socials-box {
+        /* Row of social icons */
+        display: flex;
+        gap: 15px;
+
+        .contactMe-social-link {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+
+          /* Animate gradient inside icon on hover/active */
+          &:hover .contactMe-social-icon {
+            background-position: bottom right;
+          }
+
+          &:active .contactMe-social-icon {
+            background-position: top left;
+          }
+
+          /* Assign each icon its mask based on order:
+             1: LinkedIn, 2: GitHub, 3: WhatsApp */
+          &:nth-child(1) .contactMe-social-icon {
+            -webkit-mask: url("/icons/linkedin.svg") center / contain no-repeat;
+            mask: url("/icons/linkedin.svg") center / contain no-repeat;
+          }
+
+          &:nth-child(2) .contactMe-social-icon {
+            -webkit-mask: url("/icons/github.svg") center / contain no-repeat;
+            mask: url("/icons/github.svg") center / contain no-repeat;
+          }
+
+          &:nth-child(3) .contactMe-social-icon {
+            -webkit-mask: url("/icons/whatsapp.svg") center / contain no-repeat;
+            mask: url("/icons/whatsapp.svg") center / contain no-repeat;
+          }
+
+          .contactMe-social-icon {
+            /* Icon base style: gradient-filled mask */
+            display: block;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg,
+                var(--gold-two-clr) 10%,
+                var(--gold-three-clr) 50%,
+                var(--gold-one-clr) 90%);
+            background-size: 100% 200%;
+            background-position: top left;
+            transition: background-position var(--transition-duration) ease;
+          }
+        }
+      }
+    }
+
+    .contactMe-form-box {
+      /* Right column (form) takes ~40% width on desktop */
+      flex-basis: 40%;
+    }
+  }
+}
+
+
+/*=================== md: tablets =================== */
+@media (max-width: 991.98px) {
+  .contactMe-section {
+    padding: var(--section-padding-md) 0;
+
+    .container {
+      .contactMe-content-box {
+        --gap: 35px;
+
+        .contactMe-title {
+          font-size: var(--text-3xl);
+        }
+
+        .contactMe-info-box {
+          .contactMe-info-title {
+            font-size: var(--text-lg);
+          }
+
+          .contactMe-info {
+            font-size: var(--text-sm);
+          }
+        }
+
+        .contactMe-socials-box {
+          gap: 12px;
+
+          .contactMe-social-link {
+            .contactMe-social-icon {
+              width: 22px;
+              height: 22px;
+            }
+          }
+        }
+      }
+
+      .contactMe-form-box {
+        /* Form gets slightly more width on tablets */
+        flex-basis: 50%;
+      }
+    }
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  .contactMe-section {
+    padding: var(--section-padding-sm) 0;
+
+    .container {
+      /* Switch to stacked layout on small screens */
+      align-items: unset;
+      justify-content: unset;
+      flex-direction: column;
+
+      .contactMe-content-box {
+        --gap: 30px;
+        text-align: center;
+
+        .contactMe-title {
+          margin: 0 auto;
+          font-size: var(--text-2xl);
+        }
+
+        .contactMe-info-box {
+          .contactMe-info-title {
+            font-size: var(--text-base);
+          }
+
+          .contactMe-info {
+            .contactMe-link {
+              width: fit-content;
+              margin: 0 auto;
+              display: block;
+              padding: 5px;
+            }
+          }
+        }
+
+        .contactMe-socials-box {
+          justify-content: center;
+          gap: 10px;
+
+          .contactMe-social-link {
+            .contactMe-social-icon {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+
+      .contactMe-form-box {
+        /* Let the form take full width */
+        flex-basis: unset;
+      }
+    }
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .contactMe-section {
+    padding: var(--section-padding-xm) 0;
+
+    .container {
+      .contactMe-content-box {
+        --gap: 25px;
+
+        .contactMe-title {
+          font-size: var(--text-xl);
+        }
+
+        .contactMe-info-box {
+          .contactMe-info-title {
+            font-size: var(--text-sm);
+          }
+
+          .contactMe-info {
+            font-size: var(--text-xs);
+          }
+        }
+
+        .contactMe-socials-box {
+          gap: 8px;
+
+          .contactMe-social-link {
+            .contactMe-social-icon {
+              width: 18px;
+              height: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

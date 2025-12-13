@@ -1,0 +1,207 @@
+.contactMe-form {
+  /* Card container for the whole form */
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--box-bg-clr);
+  box-shadow: 4px 4px 4px #ffffff1a;
+
+  .contactMe-form-fieldset {
+    /* Remove default fieldset border + stack all children */
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .contactMe-field-box {
+      /* Wraps label + input + validation message */
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .contactMe-field-name {
+        /* Label text */
+        font-size: var(--text-base);
+        color: var(--text-clr);
+      }
+
+      .contactMe-field {
+        /* Base input + textarea style */
+        padding: 10px;
+        outline: none;
+        border: none;
+        color: var(--text-clr);
+        background-color: var(--field-bg-clr);
+        border-radius: 5px;
+        font-size: var(--text-base);
+
+        &.textarea {
+          height: 150px;
+          resize: vertical;
+        }
+      }
+
+      .contactMe-field-msg {
+        /* Inline validation text under each field */
+        font-size: var(--text-base);
+        color: green; /* success state */
+
+        &.invalid-field-msg {
+          /* error state (overrides green) */
+          color: red;
+        }
+      }
+    }
+
+    .contactMe-submit-btn {
+      /* Submit button (aligned to the right) */
+      width: fit-content;
+      margin: 0 0 0 auto;
+      padding: 10px 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-size: var(--text-base);
+      font-weight: bold;
+      color: var(--btn-text-clr);
+      background-position: top left;
+      background: linear-gradient(
+        135deg,
+        var(--gold-two-clr),
+        var(--gold-three-clr),
+        var(--gold-one-clr) 80%
+      );
+      background-size: 100% 200%;
+      border: none;
+      border-radius: 5px;
+      transition: background-position var(--transition-duration) ease;
+
+      &:hover {
+        background-position: bottom right;
+      }
+
+      &:active {
+        background-position: top left;
+      }
+
+      &.invalid-form-btn {
+        /* Disabled appearance (when form is not valid) */
+        background: grey;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: no-drop;
+      }
+    }
+
+    .contactMe-status-msg {
+      /* Global form status line under the button */
+      padding: 10px;
+      background-color: var(--field-bg-clr);
+      text-align: center;
+      font-size: var(--text-base);
+      color: red; /* default: error */
+
+      &.loading-form-msg {
+        color: var(--text-clr);
+      }
+
+      /* success status (overrides red) */
+      &.success-form-msg {
+        color: green;
+      }
+    }
+
+    &.loading-form-fieldset {
+      /* When submitting: fieldset gets this class
+         disable fields + button */
+      .contactMe-field {
+        background-color: grey;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: no-drop;
+      }
+
+      .contactMe-submit-btn {
+        background: grey;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: no-drop;
+      }
+    }
+  }
+}
+
+
+/*=================== md: tablets =================== */
+@media (max-width: 991.98px) {
+  .contactMe-form {
+    padding: 18px;
+
+    .contactMe-form-fieldset {
+      gap: 18px;
+
+      .contactMe-field-box {
+        gap: 4px;
+
+        .contactMe-field-name {
+          font-size: var(--text-sm);
+        }
+
+        .contactMe-field {
+          padding: 8px;
+          font-size: var(--text-sm);
+        }
+
+        .contactMe-field-msg {
+          font-size: var(--text-sm);
+        }
+      }
+
+      .contactMe-submit-btn {
+        padding: 8px 16px;
+        font-size: var(--text-sm);
+        border-radius: 4px;
+      }
+
+      .contactMe-status-msg {
+        padding: 8px;
+        font-size: var(--text-sm);
+      }
+    }
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .contactMe-form {
+    padding: 15px;
+
+    .contactMe-form-fieldset {
+      gap: 15px;
+
+      .contactMe-field-box {
+        gap: 3px;
+
+        .contactMe-field-name {
+          font-size: var(--text-xs);
+        }
+
+        .contactMe-field {
+          padding: 6px;
+          font-size: var(--text-xs);
+        }
+
+        .contactMe-field-msg {
+          font-size: var(--text-xs);
+        }
+      }
+
+      .contactMe-submit-btn {
+        padding: 6px 14px;
+        font-size: var(--text-xs);
+        border-radius: 3px;
+      }
+
+      .contactMe-status-msg {
+        padding: 6px;
+        font-size: var(--text-xs);
+      }
+    }
+  }
+}

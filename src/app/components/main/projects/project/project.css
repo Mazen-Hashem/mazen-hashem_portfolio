@@ -1,0 +1,119 @@
+.projects-project-box {
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 10px;
+
+  .project-link {
+    /* Custom transition duration for hover effects inside this link */
+    --proj-transition-duration: 0.5s;
+
+    position: relative;
+    display: block;
+    width: inherit;   /* Take the width of .projects-project-box */
+    height: inherit;  /* Take the height of .projects-project-box */
+    overflow: hidden;
+
+    .projects-thumbnail {
+      /* Thumbnail image styling (fills the whole card) */
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform var(--proj-transition-duration);
+    }
+
+    /* On hover, apply a subtle rotate + zoom effect to the thumbnail */
+    &:hover .projects-thumbnail {
+      transform: rotate(-5deg) scale(1.2);
+    }
+
+    &::before {
+      /* Shiny diagonal “light streak” that sweeps across the card on hover */
+      position: absolute;
+      content: "";
+      z-index: 1;
+      top: 50%;
+      transform: rotate(45deg) translate(600%, -50%);
+      width: 10%;
+      height: 200%;
+      background: linear-gradient(
+        135deg,
+        var(--gold-two-clr) 10%,
+        var(--gold-three-clr) 50%,
+        var(--gold-one-clr) 90%
+      );
+      filter: blur(30px);
+      transition: transform var(--proj-transition-duration);
+    }
+
+    /* On hover, move the light streak diagonally across the card */
+    &:hover::before {
+      transform: rotate(45deg) translate(-1400%, -50%);
+    }
+
+    .projects-name {
+      /* Project name label that slides up from the bottom */
+      position: absolute;
+      left: 0;
+      bottom: -20%; /* Initially hidden below the card */
+      width: 100%;
+      z-index: 2;
+      padding: 10px;
+      color: var(--text-clr);
+      background-color: black;
+      font-size: var(--text-base);
+      transition: bottom var(--proj-transition-duration);
+    }
+
+    /* On hover, slide the project name up into view */
+    &:hover .projects-name {
+      bottom: 0;
+    }
+  }
+}
+
+
+/*=================== md: tablets =================== */
+@media (max-width: 991.98px) {
+  .projects-project-box {
+    /* Smaller card size on tablets */
+    width: 250px;
+    height: 250px;
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  .projects-project-box {
+    /* Smaller cards on small screens */
+    width: 200px;
+    height: 200px;
+
+    .project-link {
+      .projects-name {
+        /* Slightly smaller text/padding for the caption */
+        padding: 8px;
+        font-size: var(--text-sm);
+      }
+    }
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .projects-project-box {
+    /* Smallest cards on very small phones */
+    width: 150px;
+    height: 150px;
+
+    .project-link {
+      .projects-name {
+        padding: 6px;
+        font-size: var(--text-xs);
+      }
+    }
+  }
+}

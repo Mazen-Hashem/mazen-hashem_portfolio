@@ -1,0 +1,415 @@
+.hero-section {
+  /* Main hero area positioning and spacing */
+  position: relative;
+  z-index: 1;
+  padding: var(--section-padding-base) 0;
+
+  .hero-glow {
+    /* Decorative blurred gradient blobs behind the content */
+    position: absolute;
+    z-index: -1;
+    width: 1000px;
+    height: 250px;
+    background: radial-gradient(
+      ellipse,
+      #8FBFFD 0%,
+      #26487A 30%,
+      #0F1218 100%
+    );
+    filter: blur(45px);
+    border-radius: 50%;
+    opacity: 0.3;
+
+    /* Left glow */
+    &:first-child {
+      top: 50%;
+      transform: translateY(-70%);
+      left: -600px;
+    }
+
+    /* Right glow */
+    &:nth-child(2) {
+      transform: rotate(-25deg);
+      top: -160px;
+      right: -500px;
+    }
+  }
+
+  .container {
+    /* Layout: text on the left, image on the right */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    .hero-content-box {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .hero-greeting {
+        /* "Hi" label styling with underline accent */
+        position: relative;
+        width: fit-content;
+        margin-bottom: 35px;
+        color: var(--text-clr);
+        font-size: var(--text-lg);
+        font-weight: bold;
+
+        /* Gradient underline under the greeting */
+        &::before {
+          position: absolute;
+          content: "";
+          bottom: -27px;
+          left: 0;
+          width: 100px;
+          height: 5px;
+          background: linear-gradient(
+            135deg,
+            var(--blue-one-clr) 0%,
+            var(--blue-three-clr) 50%,
+            var(--blue-two-clr) 100%
+          );
+        }
+      }
+
+      .hero-title {
+        /* Big name heading with gold gradient text */
+        font-size: var(--text-5xl);
+        background: linear-gradient(
+          135deg,
+          var(--gold-two-clr) 10%,
+          var(--gold-three-clr) 50%,
+          var(--gold-one-clr) 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .hero-description {
+        /* Tagline text styling */
+        font-size: var(--text-base);
+        color: var(--text-clr);
+        line-height: var(--line-height-lg);
+        max-width: 450px;
+      }
+
+      .hero-actions-box {
+        /* Container for the two buttons */
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .hero-btn {
+          /* Base button styling shared by both buttons */
+          padding: 15px 30px;
+          font-size: var(--text-base);
+          cursor: pointer;
+          text-transform: uppercase;
+          text-wrap: nowrap;
+          background-position: top left;
+          transition: background-position var(--transition-duration) ease;
+
+          /* On hover, shift gradient for a subtle animated effect */
+          &:hover {
+            background-position: bottom right;
+          }
+
+          /* On click/active, reset gradient position */
+          &:active {
+            background-position: top left;
+          }
+        }
+
+        .btn-outline {
+          /* Outline-style button that uses gradient text
+             and a custom animated gradient border using ::before */
+          position: relative;
+          background: linear-gradient(
+            135deg,
+            var(--gold-two-clr) 25%,
+            var(--gold-three-clr) 40%,
+            var(--gold-one-clr) 60%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-size: 100% 200%;
+          background-clip: text;
+          color: transparent;
+
+          /* Define a custom CSS property used to control gradient angle */
+          @property --angle {
+            syntax: "<angle>";
+            initial-value: 165deg;
+            inherits: false;
+          }
+
+          &::before {
+            /* Pseudo-element that draws the border around the button */
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            background: linear-gradient(
+              var(--angle),
+              var(--gold-two-clr),
+              var(--gold-three-clr),
+              var(--global-bg-clr) 50%,
+              var(--blue-three-clr),
+              var(--blue-two-clr)
+            );
+            transition: --angle var(--transition-duration) linear;
+            /* Mask the middle so only the border area shows the gradient */
+            -webkit-mask: linear-gradient(#fff 0 0) content-box,
+              linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+          }
+
+          /* On hover, adjust the custom angle for a moving border effect */
+          &:hover::before {
+            --angle: -15deg;
+          }
+        }
+
+        .btn-primary {
+          /* Solid-filled primary CTA button */
+          color: var(--btn-text-clr);
+          background: linear-gradient(
+            135deg,
+            var(--gold-two-clr),
+            var(--gold-three-clr),
+            var(--gold-one-clr) 80%
+          );
+          border: none;
+          background-size: 100% 200%;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    /* ==== IMAGE AREA ==== */
+    .hero-image-box {
+      position: relative;
+      width: 500px;
+
+      .hero-image {
+        /* Hero illustration / photo */
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      &::before {
+        /* Decorative gradient frame behind the hero image
+           using a masked gradient border */
+        content: "";
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        z-index: -1;
+        padding: 2px;
+        background: linear-gradient(
+          135deg,
+          var(--gold-two-clr),
+          var(--gold-three-clr),
+          var(--global-bg-clr),
+          var(--blue-three-clr),
+          var(--blue-two-clr),
+          var(--blue-three-clr),
+          var(--global-bg-clr),
+          var(--gold-two-clr),
+          var(--gold-three-clr)
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+      }
+    }
+  }
+}
+
+
+/*=================== md: tablets =================== */
+@media (max-width: 991.98px) {
+  .hero-section {
+    /* Slightly smaller vertical spacing on tablets */
+    padding: var(--section-padding-md) 0;
+
+    .hero-glow {
+      height: 230px;
+
+      /* Adjust glow position for this breakpoint */
+      &:nth-child(2) {
+        top: -200px;
+        right: -600px;
+      }
+    }
+
+    .container {
+      .hero-content-box {
+        gap: 15px;
+
+        .hero-greeting {
+          margin-bottom: 30px;
+          font-size: var(--text-base);
+
+          &::before {
+            bottom: -25px;
+            width: 90px;
+            height: 4px;
+          }
+        }
+
+        .hero-title {
+          font-size: var(--text-4xl);
+        }
+
+        .hero-actions-box {
+          gap: 15px;
+
+          .hero-btn {
+            padding: 12px 24px;
+            font-size: var(--text-sm);
+          }
+
+          .btn-primary {
+            border-radius: 4px;
+          }
+        }
+      }
+
+      /* ==== IMAGE AREA ==== */
+      .hero-image-box {
+        width: 350px;
+
+        &::before {
+          width: 220px;
+          height: 220px;
+        }
+      }
+    }
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  .hero-section {
+    /* Even tighter spacing on small screens */
+    padding: var(--section-padding-sm) 0;
+
+    .hero-glow {
+      height: 200px;
+
+      /* Reposition glows to frame the content better on small screens */
+      &:first-child {
+        transform: rotate(30deg) translateY(0);
+        top: -200px;
+      }
+
+      &:nth-child(2) {
+        transform: rotate(-30deg);
+      }
+    }
+
+    .container {
+      /* Center everything horizontally when image disappears */
+      justify-content: center;
+
+      .hero-content-box {
+        align-items: center;
+        gap: 10px;
+
+        .hero-greeting {
+          margin-bottom: 25px;
+          font-size: var(--text-sm);
+
+          &::before {
+            width: 80px;
+            height: 3px;
+            bottom: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+          }
+        }
+
+        .hero-title {
+          font-size: var(--text-3xl);
+        }
+
+        .hero-description {
+          text-align: center;
+          font-size: var(--text-sm);
+          line-height: var(--line-height-sm);
+        }
+
+        .hero-actions-box {
+          /* Allow buttons to wrap if needed, and center them */
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+
+          .hero-btn {
+            padding: 10px 20px;
+            font-size: var(--text-xs);
+          }
+
+          .btn-primary {
+            border-radius: 3px;
+          }
+        }
+      }
+
+      /* ==== IMAGE AREA ==== */
+      .hero-image-box {
+        /* Hide hero image on smaller screens for a cleaner layout */
+        display: none;
+      }
+    }
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .hero-section {
+    /* Same small-section padding for very small phones */
+    padding: var(--section-padding-sm) 0;
+
+    .hero-glow {
+      height: 200px;
+
+      /* Move glows further out to avoid overwhelming small screens */
+      &:first-child {
+        transform: rotate(45deg) translateY(0);
+        top: -300px;
+        left: -700px;
+      }
+
+      &:nth-child(2) {
+        transform: rotate(-45deg);
+        top: -300px;
+        right: -700px;
+      }
+    }
+
+    .container {
+      .hero-content-box {
+        .hero-title {
+          font-size: var(--text-2xl);
+        }
+
+        .hero-description {
+          font-size: var(--text-xs);
+        }
+      }
+    }
+  }
+}

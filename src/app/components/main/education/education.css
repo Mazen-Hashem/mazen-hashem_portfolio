@@ -1,0 +1,170 @@
+.education-section {
+  /* Vertical spacing for the Education section on desktop */
+  padding: var(--section-padding-base) 0;
+
+  .container {
+    /* Stack the title row and the list of entries vertically */
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-padding-base);
+
+    .education-title-box {
+      /* Row with: "Education" + vertical bar + horizontal line */
+      display: flex;
+      align-items: center;
+
+      .education-title {
+        /* "Education" heading with your gold gradient style */
+        width: fit-content;
+        font-size: var(--text-4xl);
+        background: linear-gradient(
+          135deg,
+          var(--gold-two-clr) 10%,
+          var(--gold-three-clr) 50%,
+          var(--gold-one-clr) 90%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .education-line {
+        /* Horizontal line extending to the right of the title */
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          135deg,
+          var(--gold-two-clr) 10%,
+          var(--gold-three-clr) 50%,
+          var(--gold-one-clr) 90%
+        );
+      }
+
+      .education-br {
+        /* Vertical bar between the title and line (same style as other sections) */
+        display: inline-block;
+        width: 1px;
+        height: 2em;
+        margin-left: 10px;
+        background: linear-gradient(
+          180deg,
+          var(--blue-three-clr),
+          var(--gold-three-clr),
+          var(--gold-one-clr),
+          var(--gold-three-clr),
+          var(--blue-three-clr)
+        );
+      }
+    }
+
+    .education-content-box {
+      /* Container for all education entries (like a vertical timeline) */
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      &::before {
+        /* Vertical timeline line on the left side */
+        position: absolute;
+        content: "";
+        width: 1px;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(
+          180deg,
+          var(--blue-three-clr),
+          var(--gold-three-clr),
+          var(--gold-one-clr),
+          var(--gold-three-clr),
+          var(--blue-three-clr)
+        );
+      }
+    }
+  }
+}
+
+
+/*=================== md: tablets =================== */
+@media (max-width: 991.98px) {
+  .education-section {
+    padding: var(--section-padding-md) 0;
+
+    .container {
+      gap: var(--section-padding-md);
+
+      .education-title-box {
+        .education-title {
+          font-size: var(--text-3xl);
+        }
+
+        .education-br {
+          margin-left: 8px;
+        }
+      }
+
+      .education-content-box {
+        /* Slightly less spacing between entries */
+        gap: 18px;
+      }
+    }
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  .education-section {
+    padding: var(--section-padding-sm) 0;
+
+    .container {
+      gap: var(--section-padding-sm);
+
+      .education-title-box {
+        .education-title {
+          font-size: var(--text-2xl);
+        }
+
+        .education-br {
+          /* Shorter bar & tighter spacing on smaller screens */
+          height: 1.5em;
+          margin-left: 6px;
+        }
+      }
+
+      .education-content-box {
+        gap: 15px;
+      }
+    }
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .education-section {
+    padding: var(--section-padding-xm) 0;
+
+    .container {
+      gap: var(--section-padding-xm);
+
+      .education-title-box {
+        .education-title {
+          font-size: var(--text-xl);
+        }
+
+        .education-br {
+          height: 1.2em;
+          margin-left: 4px;
+        }
+      }
+
+      .education-content-box {
+        /* Tightest spacing between entries for very small phones */
+        gap: 10px;
+      }
+    }
+  }
+}

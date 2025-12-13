@@ -1,0 +1,294 @@
+header {
+  /* Fixed header: always visible at the top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  height: var(--header-height-base);
+
+  /* Semi-transparent, glassmorphism-style background */
+  background-color: rgba(10, 12, 16, 0.25);
+  -webkit-backdrop-filter: blur(var(--backdrop-filter-blur));
+  backdrop-filter: blur(var(--backdrop-filter-blur));
+
+  /* Subtle bottom border to separate header from content */
+  border-bottom: 1px solid var(--header-border-clr);
+
+  .container {
+    /* Make the container fill the header height */
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    .logo-box {
+      height: inherit;
+
+      .logo-link {
+        display: block;
+        height: inherit;
+
+        .logo-img {
+          display: block;
+          width: 100%;
+          height: inherit;
+        }
+      }
+    }
+
+    /* Hidden on desktop, only shown on smaller screens via media queries */
+    .btn-box {
+      display: none;
+    }
+
+    .nav-box {
+      height: inherit;
+
+      .list {
+        height: inherit;
+        display: flex;
+        align-items: center;
+
+        .item {
+          height: inherit;
+
+          .link {
+            /* Base nav link styling */
+            position: relative;
+            height: inherit;
+            display: block;
+            padding: 0 20px;
+            color: var(--text-clr);
+            font-size: var(--text-base);
+            display: flex;
+            align-items: center;
+
+            /* Hover highlight "beam" under nav items */
+            &::before {
+              position: absolute;
+              content: "";
+              bottom: 0px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 100%;
+              height: 30px;
+              clip-path: polygon(20% 100%, 80% 100%, 100% 0, 0 0);
+              opacity: 0;
+              transition: opacity var(--transition-duration);
+              background: linear-gradient(
+                180deg,
+                rgba(255, 255, 0, 0) 0%,
+                rgba(255, 255, 0, 0.1) 75%,
+                rgb(255, 255, 0, 0.2) 100%
+              );
+            }
+
+            /* On hover, show the soft glow under the link */
+            &:hover::before {
+              opacity: 0.5;
+            }
+
+            /* On active (click), apply gold gradient to the text */
+            &:active {
+              background: linear-gradient(
+                135deg,
+                var(--gold-two-clr) 40%,
+                var(--gold-three-clr) 40%,
+                var(--gold-one-clr) 70%
+              );
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+              color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/*=================== md: tablets =================== */
+@media (max-width: 991.98px) {
+  header {
+    /* Reduce header height on tablets */
+    height: var(--header-height-md);
+
+    .container {
+      position: relative; /* Needed to position dropdown nav absolutely */
+
+      .btn-box {
+        /* Show burger button on tablet & below */
+        display: block;
+
+        .menu-toggle {
+          /* Base size of the hamburger icon */
+          --size: 20px;
+
+          width: var(--size);
+          height: calc(var(--size) * 0.75);
+
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          justify-content: space-between;
+
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+
+          span {
+            /* Hamburger lines */
+            width: 100%;
+            height: 3px;
+            background: white;
+            border-radius: 5px;
+            transition: var(--transition-duration) ease;
+
+            /* Each line gets a slightly different gradient for a nice detail */
+            &:nth-child(1) {
+              background: linear-gradient(
+                135deg,
+                var(--gold-two-clr) 60%,
+                var(--gold-three-clr) 75%,
+                var(--gold-one-clr) 90%
+              );
+            }
+
+            &:nth-child(2) {
+              width: 50%;
+              background: linear-gradient(
+                135deg,
+                var(--gold-two-clr) 40%,
+                var(--gold-three-clr) 50%,
+                var(--gold-one-clr) 80%
+              );
+            }
+
+            &:nth-child(3) {
+              background: linear-gradient(
+                135deg,
+                var(--gold-two-clr) 10%,
+                var(--gold-three-clr) 25%,
+                var(--gold-one-clr) 50%
+              );
+            }
+          }
+
+          /* On hover, animate the middle line to full width */
+          &:hover span:nth-child(2) {
+            width: 100%;
+          }
+
+          /* When menu is active, transform hamburger into an "X" */
+          &.active span:nth-child(1) {
+            transform: translateY(6px) rotate(-45deg);
+          }
+
+          &.active span:nth-child(2) {
+            opacity: 0;
+          }
+
+          &.active span:nth-child(3) {
+            transform: translateY(-6px) rotate(45deg);
+          }
+        }
+      }
+
+      .nav-box {
+        /* Dropdown menu behaviour on tablets & below */
+        width: 100%;
+        height: 0; /* collapsed by default */
+        position: absolute;
+        top: 100%; /* directly below header */
+        left: 0;
+        background-color: rgba(10, 12, 16, 0.75);
+        border-bottom: none;
+        overflow: hidden; /* hide content when collapsed */
+        transition: height var(--transition-duration) ease;
+
+        /* When JS adds "active" class, we visually show border;
+           height itself is controlled by inline style from JS. */
+        &.active {
+          border-bottom: 1px solid var(--header-border-clr);
+        }
+
+        .list {
+          height: auto;
+          flex-direction: column; /* stack links vertically */
+
+          .item {
+            width: 100%;
+            height: auto;
+
+            .link {
+              /* Make each nav item fill the dropdown width */
+              width: 100%;
+              height: auto;
+              padding: 20px;
+              justify-content: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  header {
+    /* Shorter header for smaller screens */
+    height: var(--header-height-sm);
+
+    .container {
+      .nav-box {
+        .list {
+          .item {
+            .link {
+              /* Slightly smaller padding and font size for smaller screens */
+              padding: 15px;
+              font-size: var(--text-sm);
+
+              &::before {
+                /* Shorter highlight strip under nav items */
+                height: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  header {
+    /* Smallest header height on tiny devices */
+    height: var(--header-height-xm);
+
+    .container {
+      .nav-box {
+        .list {
+          .item {
+            .link {
+              /* Compact spacing and smallest font for very small screens */
+              padding: 10px;
+              font-size: var(--text-xs);
+
+              &::before {
+                height: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

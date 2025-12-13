@@ -1,0 +1,110 @@
+.skills-skill-box {
+  /* Wrapper for a single skill card.
+     The main visual styling is handled inside .skills-padding-box */
+
+  .skills-padding-box {
+    /* Card dimensions and centering */
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    /* Custom CSS property used to animate border gradient angle */
+    @property --angle {
+      syntax: "<angle>";
+      initial-value: 140deg;
+      inherits: false;
+    }
+
+    &::before {
+      /* Gradient border around the card using a mask */
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      inset: 0;
+      padding: 2px; /* thickness of the border */
+      transition: --angle var(--transition-duration) linear;
+      background: linear-gradient(
+        var(--angle),
+        var(--gold-two-clr),
+        var(--gold-three-clr),
+        var(--global-bg-clr) 25%
+      );
+      /* Mask the center so only the outline is visible */
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none; /* border overlay doesn’t block clicks */
+    }
+
+    /* On hover, rotate the gradient angle → animated border effect */
+    &:hover::before {
+      --angle: -40deg;
+    }
+
+    .skills-image {
+      /* Skill icon size */
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+
+    .skills-name {
+      /* Skill label styling */
+      font-size: var(--text-base);
+      color: var(--text-clr);
+      text-transform: uppercase;
+    }
+  }
+}
+
+
+/*=================== sm: phones (landscape) =================== */
+@media (max-width: 767.98px) {
+  .skills-skill-box {
+    .skills-padding-box {
+      /* Slightly smaller cards on small screens */
+      width: 180px;
+      height: 180px;
+      gap: 18px;
+
+      .skills-image {
+        width: 70px;
+        height: 70px;
+      }
+
+      .skills-name {
+        font-size: var(--text-sm);
+      }
+    }
+  }
+}
+
+
+/*=================== xs: phones (portrait) =================== */
+@media (max-width: 575.98px) {
+  .skills-skill-box {
+    .skills-padding-box {
+      /* Even smaller cards on very small phones */
+      width: 160px;
+      height: 160px;
+      gap: 16px;
+
+      .skills-image {
+        width: 60px;
+        height: 60px;
+      }
+
+      .skills-name {
+        font-size: var(--text-xs);
+      }
+    }
+  }
+}
